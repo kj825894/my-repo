@@ -1,0 +1,13 @@
+name: Generate functions
+on: push
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    env:
+      FORMAT_FUNC: ${{ format('{0}, {1}.', 'Hi', 'world') }} # フォーマット
+      JOIN_FUNC: ${{ join(github.event.*.html_url, ', ') }}  # カンマで結合
+      CONTEXT: ${{ toJSON(github) }} # githubコンテキストをJSON文字列でダンプ
+    steps:
+      - run: echo "${FORMAT_FUNC}"
+      - run: echo "${JOIN_FUNC}"
+      - run: echo "${CONTEXT}"
