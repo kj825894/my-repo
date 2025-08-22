@@ -3,12 +3,12 @@ on: push
 jobs:
   compare:
     runs-on: ubuntu-latest
+    env:
+      CONTAINS_FUNC: ${{ contains('Hello', 'ell') }}     # 「ell」を含むか
+      STARTS_WITH_FUNC: ${{ startsWith('Hello', 'He') }} # 「He」で始まるか
+      ENDS_WITH_FUNC: ${{ endsWith('Hello', 'lo') }}     # 「lo」で終わるか
     steps:
       - run: printenv | grep '_FUNC'
-        env:
-          CONTAINS_FUNC: ${{ contains('Hello', 'ell') }}     # 「ell」を含むか
-          STARTS_WITH_FUNC: ${{ startsWith('Hello', 'He') }} # 「He」で始まるか
-          ENDS_WITH_FUNC: ${{ endsWith('Hello', 'lo') }}     # 「lo」で終わるか
       - run: echo "${CONTAINS_FUNC}"
       - run: echo "${STARTS_WITH_FUNC}"
       - run: echo "${ENDS_WITH_FUNC}"
